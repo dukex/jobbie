@@ -41,5 +41,11 @@ describe Jobbie::Vagas do
         expect(described_class.new(url: 'http://www.vagas.com.br/vagas/v1253580/analista-de-sistemas-sharepoint-pleno', dictionary: ['DotNet']).keywords).to be_empty
       end
     end
+
+    it 'returns C# as an skill' do
+      VCR.use_cassette 'vagas-analista-de-sistemas' do
+        expect(described_class.new(url: 'http://www.vagas.com.br/vagas/v1261175/analista-de-sistemas', dictionary: ['C#']).keywords).to include "C#"
+      end
+    end
   end
 end

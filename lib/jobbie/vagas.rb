@@ -4,7 +4,7 @@ module Jobbie
   class Vagas
     def initialize(url:, dictionary: [])
       @url = url
-      @dictionary = dictionary
+      @dictionary = dictionary.map { |value| Regexp.escape value }
     end
 
     def keywords
@@ -26,7 +26,7 @@ module Jobbie
     end
 
     def regexp
-      /\b(#{@dictionary.join("|")})\b/i
+      /\b(#{@dictionary.join("|")})[\b ;]/i
     end
 
     def doc
