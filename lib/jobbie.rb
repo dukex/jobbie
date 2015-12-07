@@ -1,5 +1,7 @@
-require "jobbie/version"
+Bundler.require
+require 'nokogiri'
+require 'jobbie/version'
+require 'jobbie/vagas'
 
 module Jobbie
-  # Your code goes here...
 end
