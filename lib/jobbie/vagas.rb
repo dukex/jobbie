@@ -12,7 +12,8 @@ module Jobbie
     end
 
     def location
-      find('address').split(' / ')[0]
+      address = find('address')
+      address.split(' / ')[0] if address
     end
 
     def seniority
@@ -22,7 +23,8 @@ module Jobbie
     private
 
     def find(name)
-      doc.css("span[itemprop='#{name}']").first.text
+      element = doc.css("span[itemprop='#{name}']").first
+      element.text if element
     end
 
     def regexp

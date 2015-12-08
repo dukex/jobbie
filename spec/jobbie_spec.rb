@@ -13,6 +13,12 @@ describe Jobbie::Vagas do
         expect(described_class.new(url: 'http://www.vagas.com.br/vagas/v1257642/analista-de-sistema-sr').location).to eql 'São Paulo'
       end
     end
+
+    it 'returns nil when the job doesnt exist' do
+      VCR.use_cassette 'vagas-aprendiz-assistente-administrativo-morumbi' do
+        expect(described_class.new(url: 'http://www.vagas.com.br/vagas/v1260381/aprendiz-assistente-administrativo-morumbi').location).to be_nil
+      end
+    end
   end
 
   describe '#seniority' do
