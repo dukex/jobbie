@@ -1,5 +1,3 @@
-require 'open-uri'
-
 module Jobbie
   class Vagas < App
     def seniority

@@ -1,3 +1,5 @@
+require 'open-uri'
+
 module Jobbie
   class App
     def initialize(url:, dictionary: {})
@@ -23,7 +25,7 @@ module Jobbie
     end
 
     def scan(values)
-      doc.text.scan(regexp(values.map { |value| Regexp.escape value })).flatten
+      doc.text.scan(regexp(values)).flatten
     end
 
     def doc
@@ -31,7 +33,7 @@ module Jobbie
     end
 
     def regexp(values)
-      /\b(#{values.join("|")})[\b ;,\)]/i
+      /\b(#{values.map { |value| Regexp.escape(value).gsub("\\ ", "[\\ \\-]") }.join("|")})[\b ;,\)]/i
     end
   end
 end
