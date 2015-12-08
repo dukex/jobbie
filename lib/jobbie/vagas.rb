@@ -2,13 +2,15 @@ require 'open-uri'
 
 module Jobbie
   class Vagas
-    def initialize(url:, dictionary: [])
+    def initialize(url:, dictionary: {})
       @url = url
-      @dictionary = dictionary.map { |value| Regexp.escape value }
+      @dictionary = dictionary
     end
 
-    def keywords
-      doc.text.scan(regexp).flatten
+    %w(focuses skills).each do |collection|
+      define_method collection do
+        scan @dictionary[collection.to_sym]
+      end
     end
 
     def location
@@ -22,13 +24,17 @@ module Jobbie
 
     private
 
+    def scan(values)
+      doc.text.scan(regexp(values.map { |value| Regexp.escape value })).flatten
+    end
+
     def find(name)
       element = doc.css("span[itemprop='#{name}']").first
       element.text if element
     end
 
-    def regexp
-      /\b(#{@dictionary.join("|")})[\b ;]/i
+    def regexp(values)
+      /\b(#{values.join("|")})[\b ;]/i
     end
 
     def doc

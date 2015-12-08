@@ -29,28 +29,36 @@ describe Jobbie::Vagas do
     end
   end
 
-  describe '#keywords' do
-    it 'returns the keywords' do
+  describe '#skills' do
+    it 'returns the skills' do
       VCR.use_cassette 'vagas-analista-de-sistema-sr' do
-        expect(described_class.new(url: 'http://www.vagas.com.br/vagas/v1257642/analista-de-sistema-sr', dictionary: %w(Java Ruby Python)).keywords).to match_array %w(JAVA)
+        expect(described_class.new(url: 'http://www.vagas.com.br/vagas/v1257642/analista-de-sistema-sr', dictionary: { skills: %w(Java Ruby Python) }).skills).to match_array %w(JAVA)
       end
     end
 
-    it 'doesnt return keywords from similar jobs' do
-      VCR.use_cassette 'vagas-analista-de-sistemas-bi' do
-        expect(described_class.new(url: 'http://www.vagas.com.br/vagas/v1266059/analista-de-sistemas-bi', dictionary: ['Business Intelligence']).keywords).to be_empty
-      end
-    end
-
-    it 'doesnt return keywords from another jobs from the company' do
+    it 'doesnt return skills from another jobs from the company' do
       VCR.use_cassette 'vagas-analista-de-sistemas-sharepoint-pleno' do
-        expect(described_class.new(url: 'http://www.vagas.com.br/vagas/v1253580/analista-de-sistemas-sharepoint-pleno', dictionary: ['DotNet']).keywords).to be_empty
+        expect(described_class.new(url: 'http://www.vagas.com.br/vagas/v1253580/analista-de-sistemas-sharepoint-pleno', dictionary: { skills: ['DotNet'] }).skills).to be_empty
       end
     end
 
     it 'returns C# as an skill' do
       VCR.use_cassette 'vagas-analista-de-sistemas' do
-        expect(described_class.new(url: 'http://www.vagas.com.br/vagas/v1261175/analista-de-sistemas', dictionary: ['C#']).keywords).to include "C#"
+        expect(described_class.new(url: 'http://www.vagas.com.br/vagas/v1261175/analista-de-sistemas', dictionary: { skills: ['C#'] }).skills).to include 'C#'
+      end
+    end
+  end
+
+  describe '#focuses' do
+    it 'returns the focuses' do
+      VCR.use_cassette 'vagas-analista-de-sistema-sr' do
+        expect(described_class.new(url: 'http://www.vagas.com.br/vagas/v1257642/analista-de-sistema-sr', dictionary: { focuses: ['Analista de Sistema'] }).focuses.uniq).to match_array ['Analista de Sistema']
+      end
+    end
+
+    it 'doesnt return focuses from similar jobs' do
+      VCR.use_cassette 'vagas-analista-de-sistemas-bi' do
+        expect(described_class.new(url: 'http://www.vagas.com.br/vagas/v1266059/analista-de-sistemas-bi', dictionary: { focuses: ['Business Intelligence'] }).focuses).to be_empty
       end
     end
   end
