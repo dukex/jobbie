@@ -27,12 +27,15 @@ Or install it yourself as:
 ## Usage
 
 ``` ruby
+url = 'http://trampos.co/oportunidades/123939'
+dictionary = { skills: %(Java Ruby Python ...), focuses: %w(Back-end Front-end Analytics ...) }
+
 # Factory automatically detects the site by the URL
-job = Jobbie::Factory.init(url: 'http://trampos.co/oportunidades/123939', dictionary: { skills: %(Java Ruby Python ...), focuses: %w(Back-end Front-end Analytics ...) })
+job = Jobbie::Factory.init url: url, dictionary: dictionary
 
 # OR
 
-job == Jobbie::Vagas.new url: 'http://trampos.co/oportunidades/123939', dictionary: { skills: %(Java Ruby Python ...), focuses: %w(Back-end Front-end Analytics ...) }
+job == Jobbie::Vagas.new url: url, dictionary: dictionary
 
 # THEN
 
