@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Diego Carrion"]
   spec.email         = ["tech@contratado.me"]
 
-  spec.summary       = %q{A jobs crawler and parser}
+  spec.summary       = %q{A job pages parser}
   spec.homepage      = "https://github.com/contratadome/jobbie"
   spec.license       = "MIT"
 

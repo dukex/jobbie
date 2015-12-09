@@ -1,8 +1,12 @@
 # Jobbie
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/jobbie`. To experiment with that code, run `bin/console` for an interactive prompt.
+Jobbie parses the job pages from different sites:
 
-TODO: Delete this and the text above, and describe your gem
+* [99jobs](https://www.99jobs.com/)
+* [Indeed](http://www.indeed.com.br/)
+* [InfoJobs](http://www.infojobs.com.br/)
+* [Trampos](http://trampos.co/)
+* [Vagas](http://www.vagas.com.br/)
 
 ## Installation
 
@@ -22,7 +26,21 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+``` ruby
+# Factory automatically detects the site by the URL
+job = Jobbie::Factory.init(url: 'http://trampos.co/oportunidades/123939', dictionary: { skills: %(Java Ruby Python ...), focuses: %w(Back-end Front-end Analytics ...) })
+
+# OR
+
+job == Jobbie::Vagas.new url: 'http://trampos.co/oportunidades/123939', dictionary: { skills: %(Java Ruby Python ...), focuses: %w(Back-end Front-end Analytics ...) }
+
+# THEN
+
+job.location
+job.seniority
+job.skills
+job.focuses
+```
 
 ## Development
 
@@ -32,7 +50,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/jobbie.
+Bug reports and pull requests are welcome on GitHub at https://github.com/contratadome/jobbie.
 
 
 ## License
