@@ -28,7 +28,15 @@ describe Jobbie::Trampos do
   describe '#skills' do
     it 'returns the skills' do
       VCR.use_cassette 'trampos-123892' do
-        expect(described_class.new(url: 'http://trampos.co/oportunidades/123892?tr=ruby', dictionary: { skills: %w(Java Ruby Python) }).skills).to match_array %w(Java Ruby java)
+        expect(described_class.new(url: 'http://trampos.co/oportunidades/123892?tr=ruby', dictionary: { skills: %w(Java Ruby Python) }).skills).to match_array %w(Java Ruby)
+      end
+    end
+
+    it 'doesnt return skills from content that is not from the job' do
+      VCR.use_cassette 'trampos-123767' do
+        skills = described_class.new(url: 'http://trampos.co/oportunidades/123767?tr=ruby', dictionary: { skills: %w(SEO SEM) }).skills
+        expect(skills).to_not include "SEO"
+        expect(skills).to_not include "SEM"
       end
     end
   end

@@ -37,7 +37,11 @@ module Jobbie
     end
 
     def scan(values)
-      doc.text.scan(regexp(values)).flatten
+      document_text.scan(regexp(values)).flatten
+    end
+
+    def document_text
+      doc.text
     end
 
     def doc
