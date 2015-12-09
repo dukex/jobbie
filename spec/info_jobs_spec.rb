@@ -23,6 +23,14 @@ describe Jobbie::InfoJobs do
     end
   end
 
+  describe '#required_skills' do
+    it 'returns the required skills' do
+      VCR.use_cassette 'info-jobs-vaga-de-desenvolvedor-ruby-em-rio-grande-do-sul__4844101' do
+        expect(described_class.new(url: 'http://www.infojobs.com.br/vaga-de-desenvolvedor-ruby-em-rio-grande-do-sul__4844101.aspx', dictionary: { skills: %w(Java Ruby Python) }).required_skills).to include 'Ruby'
+      end
+    end
+  end
+
   describe '#skills' do
     it 'returns the skills' do
       VCR.use_cassette 'info-jobs-vaga-de-desenvolvedor-senior-back-end-em-santa-catarina' do

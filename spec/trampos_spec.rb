@@ -17,6 +17,14 @@ describe Jobbie::Trampos do
     end
   end
 
+  describe '#required_skills' do
+    it 'returns the required skills' do
+      VCR.use_cassette 'trampos-123767' do
+        expect(described_class.new(url: 'http://trampos.co/oportunidades/123767?tr=ruby', dictionary: { skills: %w(Java Ruby Python) }).required_skills).to include 'Ruby'
+      end
+    end
+  end
+
   describe '#skills' do
     it 'returns the skills' do
       VCR.use_cassette 'trampos-123892' do

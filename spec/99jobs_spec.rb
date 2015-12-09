@@ -17,6 +17,14 @@ describe Jobbie::NinetynineJobs do
     end
   end
 
+  describe '#required_skills' do
+    it 'returns the required skills' do
+      VCR.use_cassette '99jobs-6727-ios-hero' do
+        expect(described_class.new(url: 'https://www.99jobs.com/inevent/jobs/6727-ios-hero', dictionary: { skills: %w(Java iOS Python) }).required_skills).to include 'iOS'
+      end
+    end
+  end
+
   describe '#skills' do
     it 'returns the skills' do
       VCR.use_cassette '99jobs-6663-desenvolvimento-web-sr' do

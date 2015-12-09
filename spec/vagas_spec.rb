@@ -23,6 +23,14 @@ describe Jobbie::Vagas do
     end
   end
 
+  describe '#required_skills' do
+    it 'returns the required skills' do
+      VCR.use_cassette 'vagas-desenvolvedor-de-solucoes-fantasticas-em-ruby-sp' do
+        expect(described_class.new(url: 'http://www.vagas.com.br/vagas/v1190070/desenvolvedor-de-solucoes-fantasticas-em-ruby-sp', dictionary: { skills: %w(Java Ruby Python) }).required_skills).to match_array %w(Ruby)
+      end
+    end
+  end
+
   describe '#skills' do
     it 'returns the skills' do
       VCR.use_cassette 'vagas-analista-de-sistema-sr' do

@@ -42,6 +42,7 @@ job == Jobbie::Trampos.new url: url, dictionary: dictionary
 job.location
 job.seniority
 job.skills
+job.required_skills
 job.focuses
 ```
 

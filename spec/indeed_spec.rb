@@ -17,6 +17,14 @@ describe Jobbie::Indeed do
     end
   end
 
+  describe '#required_skills' do
+    it 'returns the required skills' do
+      VCR.use_cassette 'indeed-6302cd9dc565154a' do
+        expect(described_class.new(url: 'http://www.indeed.com.br/cmp/Capitani-IT/jobs/Desenvolvedor-Ruby-Rails-Senior-6302cd9dc565154a?q=ruby', dictionary: { skills: %w(Java Ruby Python) }).required_skills).to include 'Ruby'
+      end
+    end
+  end
+
   describe '#skills' do
     it 'returns the skills' do
       VCR.use_cassette 'indeed-a361c99a6feab476' do

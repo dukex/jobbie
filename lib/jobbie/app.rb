@@ -11,6 +11,10 @@ module Jobbie
       scan(%w(Junior Júnior Senior Sênior Pleno)).first
     end
 
+    def required_skills
+      title_text.scan(regexp(@dictionary[:skills])).flatten
+    end
+
     %w(focuses skills).each do |collection|
       define_method collection do
         scan @dictionary[collection.to_sym]
@@ -23,6 +27,10 @@ module Jobbie
     end
 
     private
+
+    def title_text
+      doc.css(title_selector).map(&:text).join(' ')
+    end
 
     def find(selector)
       doc.css(selector).first
@@ -40,6 +48,10 @@ module Jobbie
 
     def regexp(values)
       /\b(#{values.map { |value| Regexp.escape(value).gsub("\\ ", "[\\ \\-]") }.join("|")})[\b\s;,\n\)]/i
+    end
+
+    def title_selector
+      'h1'
     end
 
     def selectors_to_remove

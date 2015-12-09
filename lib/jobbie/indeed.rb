@@ -7,5 +7,9 @@ module Jobbie
     def location_selector
       'span.location'
     end
+
+    def title_selector
+      '.jobtitle font'
+    end
   end
 end
