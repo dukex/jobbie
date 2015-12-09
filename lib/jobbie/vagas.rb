@@ -6,6 +6,10 @@ module Jobbie
 
     private
 
+    def selectors_to_remove
+      'script, aside, .expiradaVagasSimilares'
+    end
+
     def location_selector
       "span[itemprop='address']"
     end

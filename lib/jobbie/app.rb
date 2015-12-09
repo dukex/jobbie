@@ -7,6 +7,10 @@ module Jobbie
       @dictionary = dictionary
     end
 
+    def seniority
+      scan(%w(Junior Júnior Senior Sênior Pleno)).first
+    end
+
     %w(focuses skills).each do |collection|
       define_method collection do
         scan @dictionary[collection.to_sym]
@@ -29,11 +33,16 @@ module Jobbie
     end
 
     def doc
-      @doc ||= Nokogiri(open(@url)).tap { |doc| doc.css('script, aside, .expiradaVagasSimilares').remove }
+      @doc ||= Nokogiri(open(@url).read, nil, 'utf-8').tap do |doc| 
+        doc.css(selectors_to_remove).remove if selectors_to_remove
+      end
     end
 
     def regexp(values)
-      /\b(#{values.map { |value| Regexp.escape(value).gsub("\\ ", "[\\ \\-]") }.join("|")})[\b ;,\)]/i
+      /\b(#{values.map { |value| Regexp.escape(value).gsub("\\ ", "[\\ \\-]") }.join("|")})[\b\s;,\n\)]/i
+    end
+
+    def selectors_to_remove
     end
   end
 end
