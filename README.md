@@ -35,7 +35,7 @@ job = Jobbie::Factory.init url: url, dictionary: dictionary
 
 # OR
 
-job == Jobbie::Vagas.new url: url, dictionary: dictionary
+job == Jobbie::Trampos.new url: url, dictionary: dictionary
 
 # THEN
 
