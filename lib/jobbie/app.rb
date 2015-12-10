@@ -26,6 +26,10 @@ module Jobbie
       element.text.split(/[,\/]/)[0].strip if element
     end
 
+    def company
+      find(company_locator).text
+    end
+
     private
 
     def title_text

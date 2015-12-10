@@ -6,6 +6,10 @@ module Jobbie
 
     private
 
+    def company_locator
+      '.col-md-3 h1.panel-title'
+    end
+
     def location_selector
       'address'
     end

@@ -46,4 +46,12 @@ describe Jobbie::InfoJobs do
       end
     end
   end
+
+  describe '#company' do
+    it 'returns the company' do
+      VCR.use_cassette 'info-jobs-vaga-de-analista-programador-java-zona-leste-em-sao-paulo' do
+        expect(described_class.new(url: 'http://www.infojobs.com.br/vaga-de-analista-programador-java-zona-leste-em-sao-paulo__4879239.aspx').company).to eql 'SOFTMATIC'
+      end
+    end
+  end
 end

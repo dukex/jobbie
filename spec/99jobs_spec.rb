@@ -40,4 +40,12 @@ describe Jobbie::NinetynineJobs do
       end
     end
   end
+
+  describe '#company' do
+    it 'returns the company' do
+      VCR.use_cassette '99jobs-6648-estagio-em-direito-contratos' do
+        expect(described_class.new(url: 'https://www.99jobs.com/abril/jobs/6648-estagio-em-direito-contratos').company).to eql 'Abril'
+      end
+    end
+  end
 end

@@ -1,5 +1,11 @@
 module Jobbie
   class Indeed < App
+    private
+
+    def company_locator
+      'span.company'
+    end
+
     def selectors_to_remove
       '.recJobs'
     end

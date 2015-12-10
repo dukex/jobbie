@@ -48,4 +48,12 @@ describe Jobbie::Trampos do
       end
     end
   end
+
+  describe '#company' do
+    it 'returns the company' do
+      VCR.use_cassette 'trampos-123892' do
+        expect(described_class.new(url: 'http://trampos.co/oportunidades/123892?tr=ruby').company).to eql 'Braza Digital'
+      end
+    end
+  end
 end

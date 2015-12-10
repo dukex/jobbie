@@ -4,6 +4,10 @@ module Jobbie
       opportunity['city']
     end
 
+    def company
+      opportunity['company']['name']
+    end
+
     private
 
     def title_text
@@ -11,13 +15,11 @@ module Jobbie
     end
 
     def document_text
-      opportunity.values.join ' '
+      opportunity.reject { |key| key == 'company' }.values.join ' '
     end
 
     def opportunity
-      @opportunity ||= JSON.parse(doc.text.scan(/opportunity: (\{.*\})/).flatten[0])['opportunity'].tap do |hash|
-        hash.delete 'company'
-      end
+      @opportunity ||= JSON.parse(doc.text.scan(/opportunity: (\{.*\})/).flatten[0])['opportunity']
     end
   end
 end

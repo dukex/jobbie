@@ -4,6 +4,10 @@ module Jobbie
       find("span[itemprop='occupationalCategory']").text
     end
 
+    def company
+      find('title').text.scan(/\-\s(.*)\s\(/).flatten.first
+    end
+
     private
 
     def selectors_to_remove

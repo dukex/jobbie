@@ -64,4 +64,12 @@ describe Jobbie::Vagas do
       end
     end
   end
+
+  describe '#company' do
+    it 'returns the company' do
+      VCR.use_cassette 'vagas-analista-de-sistema-sr' do
+        expect(described_class.new(url: 'http://www.vagas.com.br/vagas/v1257642/analista-de-sistema-sr').company).to eql 'Altran Consultoria em Tecnologia Ltda'
+      end
+    end
+  end
 end

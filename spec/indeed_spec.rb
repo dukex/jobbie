@@ -40,4 +40,12 @@ describe Jobbie::Indeed do
       end
     end
   end
+
+  describe '#company' do
+    it 'returns the company' do
+      VCR.use_cassette 'indeed-68f9e23429fd75c1' do
+        expect(described_class.new(url: 'http://www.indeed.com.br/cmp/Shaw-and-Partners/jobs/Programador-J%C3%BAnior-68f9e23429fd75c1?q=ruby').company).to eql 'Shaw and Partners'
+      end
+    end
+  end
 end
