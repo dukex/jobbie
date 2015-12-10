@@ -27,6 +27,8 @@ Or install it yourself as:
 ## Usage
 
 ``` ruby
+# Parsing a job page
+
 url = 'http://trampos.co/oportunidades/123939'
 dictionary = { skills: %(Java Ruby Python ...), focuses: %w(Back-end Front-end Analytics ...) }
 
@@ -45,6 +47,16 @@ job.seniority
 job.skills
 job.required_skills
 job.focuses
+
+# Parsing a search result
+
+job = Jobbie::Factory.init(url: 'http://trampos.co/oportunidades?tr=ruby').jobs[0]
+
+# THEN
+
+job.first.title
+job.first.url
+job.first.location
 ```
 
 ## Development

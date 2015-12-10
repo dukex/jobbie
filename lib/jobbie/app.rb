@@ -28,7 +28,7 @@ module Jobbie
     def location
       @location ||= begin
         element = find location_selector
-        element.text.split(/[,\/]/)[0].strip if element
+        element.text.split(%r{[,\/]})[0].strip if element
       end
     end
 
@@ -41,6 +41,10 @@ module Jobbie
     end
 
     private
+
+    def jobs_elements
+      doc.css(jobs_selector)
+    end
 
     def title_text
       doc.css(title_selector).map(&:text).join(' ')
