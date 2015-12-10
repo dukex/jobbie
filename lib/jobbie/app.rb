@@ -23,7 +23,7 @@ module Jobbie
 
     def location
       element = find location_selector
-      element.text.split(/[,\/]/)[0].strip if element
+      element.text.split(%r{[,\/]})[0].strip if element
     end
 
     def company
@@ -49,7 +49,7 @@ module Jobbie
     end
 
     def doc
-      @doc ||= Nokogiri(open(@url).read, nil, 'utf-8').tap do |doc| 
+      @doc ||= Nokogiri(open(@url).read, nil, 'utf-8').tap do |doc|
         doc.css(selectors_to_remove).remove if selectors_to_remove
       end
     end

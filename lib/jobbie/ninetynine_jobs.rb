@@ -1,7 +1,7 @@
 module Jobbie
   class NinetynineJobs < App
     def seniority
-      find(".col-md-6 p").text
+      find('.col-md-6 p').text
     end
 
     private

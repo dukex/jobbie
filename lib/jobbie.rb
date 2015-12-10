@@ -14,11 +14,11 @@ module Jobbie
     end
 
     def self.class_for(url)
-      { "www.vagas.com.br" => Vagas,
-        "www.infojobs.com.br" => InfoJobs,
-        "www.99jobs.com" => NinetynineJobs,
-        "www.indeed.com.br" => Indeed,
-        "trampos.co" => Trampos
+      { 'www.vagas.com.br' => Vagas,
+        'www.infojobs.com.br' => InfoJobs,
+        'www.99jobs.com' => NinetynineJobs,
+        'www.indeed.com.br' => Indeed,
+        'trampos.co' => Trampos
       }[URI.parse(url).host]
     end
   end

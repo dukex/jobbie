@@ -35,8 +35,8 @@ describe Jobbie::Trampos do
     it 'doesnt return skills from content that is not from the job' do
       VCR.use_cassette 'trampos-123767' do
         skills = described_class.new(url: 'http://trampos.co/oportunidades/123767?tr=ruby', dictionary: { skills: %w(SEO SEM) }).skills
-        expect(skills).to_not include "SEO"
-        expect(skills).to_not include "SEM"
+        expect(skills).to_not include 'SEO'
+        expect(skills).to_not include 'SEM'
       end
     end
   end

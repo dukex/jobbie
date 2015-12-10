@@ -7,7 +7,7 @@ describe Jobbie do
 end
 
 describe Jobbie::Factory do
-  describe ".init" do
+  describe '.init' do
     { 'http://www.vagas.com.br/vagas/v1259656/tecnico-seguros-ramos-elementares' => Jobbie::Vagas,
       'http://www.infojobs.com.br/vaga-de-programacao-php-em-santa-catarina__4795320.aspx' => Jobbie::InfoJobs,
       'https://www.99jobs.com/abril/jobs/6645-estagio-em-comunicacao' => Jobbie::NinetynineJobs,
