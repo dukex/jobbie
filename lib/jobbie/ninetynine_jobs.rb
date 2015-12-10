@@ -8,7 +8,7 @@ module Jobbie
 
     def to_job_params(job)
       a = job.css('a').first
-      { url: a.attr('href'), title: a.css('h1').first.text.strip, location: a.css('.mbf').first.text.scan(/Local  (.*),/).flatten[0] }
+      { url: path_to_url(a.attr('href')), title: a.css('h1').first.text.strip, location: a.css('.mbf').first.text.scan(/Local  (.*),/).flatten[0] }
     end
 
     def jobs_selector

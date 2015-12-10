@@ -81,6 +81,10 @@ module Jobbie
     end
 
     def path_to_url(path)
+      path.start_with?("http") ? path : build_url(path)
+    end
+
+    def build_url(path)
       uri = URI url
       "#{uri.scheme}://#{uri.host}#{path}"
     end
