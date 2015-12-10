@@ -50,7 +50,7 @@ describe Jobbie::Vagas do
       end
     end
 
-    it 'returns skills' do
+    it 'returns ruby skill' do
       VCR.use_cassette 'vagas-analista-de-sistemas-java' do
         expect(described_class.new(url: 'http://www.vagas.com.br/vagas/v1276198/analista-de-sistemas-java', dictionary: { skills: ['Ruby'] }).skills).to include 'Ruby'
       end
