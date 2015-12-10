@@ -54,4 +54,16 @@ describe Jobbie::InfoJobs do
       end
     end
   end
+
+  describe '#jobs' do
+    it 'returns the jobs' do
+      VCR.use_cassette 'info-jobs-ruby' do
+        jobs = described_class.new(url: 'http://www.infojobs.com.br/empregos.aspx?Palabra=ruby').jobs
+        expect(jobs.size).to eql 15
+        expect(jobs.first.title).to eql 'Programador Ruby On Rails'
+        expect(jobs.first.location).to eql 'São Paulo'
+        expect(jobs.last.url).to eql 'http://www.infojobs.com.br/vaga-de-analista-tecnologia-em-distrito-federal__4809760.aspx'
+      end
+    end
+  end
 end

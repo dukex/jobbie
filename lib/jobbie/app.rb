@@ -2,9 +2,13 @@ require 'open-uri'
 
 module Jobbie
   class App
-    def initialize(url:, dictionary: {})
+    attr_reader :url, :title
+
+    def initialize(url:, dictionary: {}, title: nil, location: nil)
       @url = url
       @dictionary = dictionary
+      @title = title
+      @location = location
     end
 
     def seniority
@@ -22,12 +26,18 @@ module Jobbie
     end
 
     def location
-      element = find location_selector
-      element.text.split(%r{[,\/]})[0].strip if element
+      @location ||= begin
+        element = find location_selector
+        element.text.split(/[,\/]/)[0].strip if element
+      end
     end
 
     def company
       find(company_locator).text
+    end
+
+    def jobs
+      jobs_elements.map { |job| self.class.new to_job_params(job) }
     end
 
     private
@@ -64,6 +74,11 @@ module Jobbie
 
     def selectors_to_remove
       'script, aside'
+    end
+
+    def path_to_url(path)
+      uri = URI url
+      "#{uri.scheme}://#{uri.host}#{path}"
     end
   end
 end

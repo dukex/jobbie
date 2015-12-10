@@ -56,4 +56,16 @@ describe Jobbie::Trampos do
       end
     end
   end
+
+  describe '#jobs' do
+    it 'returns the jobs' do
+      VCR.use_cassette 'trampos-ruby' do
+        jobs = described_class.new(url: 'http://trampos.co/oportunidades?tr=ruby').jobs
+        expect(jobs.size).to eql 4
+        expect(jobs.first.title).to eql 'Desenvolvedor(a) Back-end Pleno'
+        expect(jobs.first.location).to eql 'São Paulo'
+        expect(jobs.last.url).to eql 'http://trampos.co/oportunidades/123587'
+      end
+    end
+  end
 end

@@ -78,4 +78,16 @@ describe Jobbie::Vagas do
       end
     end
   end
+
+  describe '#jobs' do
+    it 'returns the jobs' do
+      VCR.use_cassette 'vagas-ruby' do
+        jobs = described_class.new(url: 'http://www.vagas.com.br/vagas-de-ruby').jobs
+        expect(jobs.size).to eql 6
+        expect(jobs.first.title).to eql 'Senior Data Analyst'
+        expect(jobs.first.location).to eql 'Rio de Janeiro'
+        expect(jobs.last.url).to eql 'http://www.vagas.com.br/vagas/v1271254/desenvolvedor-front-end-pleno-senior-zona-sul-sp'
+      end
+    end
+  end
 end

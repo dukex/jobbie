@@ -10,6 +10,14 @@ module Jobbie
 
     private
 
+    def to_job_params(job)
+      { url: path_to_url(job.attr('href')), title: job.attr('title'), location: job.css("span[itemprop='addressLocality']").first.text.split(' / ')[0] }
+    end
+
+    def jobs_elements
+      doc.css('.link-detalhes-vaga')
+    end
+
     def selectors_to_remove
       'script, aside, .expiradaVagasSimilares'
     end
