@@ -46,13 +46,25 @@ describe Jobbie::Vagas do
 
     it 'returns C# as an skill' do
       VCR.use_cassette 'vagas-analista-de-sistemas' do
-        expect(described_class.new(url: 'http://www.vagas.com.br/vagas/v1261175/analista-de-sistemas', dictionary: { skills: ['C#'] }).skills).to include 'C#'
+        expect(described_class.new(url: 'http://www.vagas.com.br/vagas/v1261175/analista-de-sistemas', dictionary: { skills: ['C', 'C#', 'C++'] }).skills).to include 'C#'
       end
     end
 
     it 'returns ruby skill' do
       VCR.use_cassette 'vagas-analista-de-sistemas-java' do
         expect(described_class.new(url: 'http://www.vagas.com.br/vagas/v1276198/analista-de-sistemas-java', dictionary: { skills: ['Ruby'] }).skills).to include 'Ruby'
+      end
+    end
+
+    it 'does not return C skill in C# job' do
+      VCR.use_cassette 'vagas-analista-de-sistemas' do
+        expect(described_class.new(url: 'http://www.vagas.com.br/vagas/v1261175/analista-de-sistemas', dictionary: { skills: ['C', 'C#', 'C++'] }).skills).to_not include 'C'
+      end
+    end
+
+    it 'returns C and C++' do
+      VCR.use_cassette 'vagas-analista-desenvolvedor-c' do
+        expect(described_class.new(url: 'http://www.vagas.com.br/vagas/v1281695/analista-desenvolvedor-c', dictionary: { skills: ['C', 'C#', 'C++'] }).skills).to match_array %w(C++ C++ C)
       end
     end
   end

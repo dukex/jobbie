@@ -55,7 +55,7 @@ module Jobbie
     end
 
     def scan(values)
-      document_text.scan(regexp(values)).flatten
+      document_text.gsub(%r{,|\/}, ' ').scan(regexp(values)).flatten
     end
 
     def document_text
@@ -69,7 +69,7 @@ module Jobbie
     end
 
     def regexp(values)
-      /(?:\s(?:|\W)|^)(#{values.map { |value| Regexp.escape(value).gsub("\\ ", "[\\ \\-]") }.join("|")})(?:\s|\W)/i
+      /(?:\s(?:|\W)|^)(#{values.map { |value| Regexp.escape(value).gsub("\\ ", "[\\ \\-]") }.join("|")})(?:\s|\W\s)/i
     end
 
     def title_selector
