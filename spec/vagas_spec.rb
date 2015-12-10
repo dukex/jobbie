@@ -49,6 +49,12 @@ describe Jobbie::Vagas do
         expect(described_class.new(url: 'http://www.vagas.com.br/vagas/v1261175/analista-de-sistemas', dictionary: { skills: ['C#'] }).skills).to include 'C#'
       end
     end
+
+    it 'returns skills' do
+      VCR.use_cassette 'vagas-analista-de-sistemas-java' do
+        expect(described_class.new(url: 'http://www.vagas.com.br/vagas/v1276198/analista-de-sistemas-java', dictionary: { skills: ['Ruby'] }).skills).to include 'Ruby'
+      end
+    end
   end
 
   describe '#focuses' do

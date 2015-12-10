@@ -10,6 +10,9 @@ module Jobbie
 
     private
 
+    def selectors_to_remove
+    end
+
     def title_text
       doc.css("meta[name='title']").first.attr 'content'
     end

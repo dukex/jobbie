@@ -55,7 +55,7 @@ module Jobbie
     end
 
     def regexp(values)
-      /\b(#{values.map { |value| Regexp.escape(value).gsub("\\ ", "[\\ \\-]") }.join("|")})[\b\s;,\n\)]/i
+      /(?:\s(?:|\W)|^)(#{values.map { |value| Regexp.escape(value).gsub("\\ ", "[\\ \\-]") }.join("|")})(?:\s|\W)/i
     end
 
     def title_selector
@@ -63,6 +63,7 @@ module Jobbie
     end
 
     def selectors_to_remove
+      'script, aside'
     end
   end
 end
