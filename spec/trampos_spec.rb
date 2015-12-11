@@ -64,6 +64,7 @@ describe Jobbie::Trampos do
         expect(jobs.size).to eql 4
         expect(jobs.first.title).to eql 'Desenvolvedor(a) Back-end Pleno'
         expect(jobs.first.location).to eql 'São Paulo'
+        expect(jobs.first.company).to eql 'Braza Digital'
         expect(jobs.last.url).to eql 'http://trampos.co/oportunidades/123587'
       end
     end

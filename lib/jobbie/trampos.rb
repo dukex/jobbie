@@ -5,7 +5,7 @@ module Jobbie
     end
 
     def company
-      opportunity['company']['name']
+      @company ||= opportunity['company']['name']
     end
 
     private
@@ -14,7 +14,7 @@ module Jobbie
     end
 
     def to_job_params(job)
-      { url: path_to_url("/oportunidades/#{job['id']}"), title: job['name'], location: job['city'] }
+      { url: path_to_url("/oportunidades/#{job['id']}"), title: job['name'], location: job['city'], company: job['company']['name'] }
     end
 
     def jobs_elements

@@ -62,6 +62,7 @@ describe Jobbie::InfoJobs do
         expect(jobs.size).to eql 15
         expect(jobs.first.title).to eql 'Programador Ruby On Rails'
         expect(jobs.first.location).to eql 'São Paulo'
+        expect(jobs.first.company).to eql 'Retail'
         expect(jobs.last.url).to eql 'http://www.infojobs.com.br/vaga-de-analista-tecnologia-em-distrito-federal__4809760.aspx'
       end
     end

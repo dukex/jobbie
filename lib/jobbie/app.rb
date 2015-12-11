@@ -2,13 +2,14 @@ require 'open-uri'
 
 module Jobbie
   class App
-    attr_reader :url, :title
+    attr_reader :url, :title, :company
 
-    def initialize(url:, dictionary: {}, title: nil, location: nil)
+    def initialize(url:, dictionary: {}, title: nil, location: nil, company: nil)
       @url = url
       @dictionary = dictionary
       @title = title
       @location = location
+      @company = company
     end
 
     def seniority
@@ -33,7 +34,10 @@ module Jobbie
     end
 
     def company
-      find(company_locator).text
+      @company ||= begin
+        element = find company_locator
+        element.text if element
+      end
     end
 
     def jobs

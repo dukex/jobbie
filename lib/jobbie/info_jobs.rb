@@ -4,7 +4,7 @@ module Jobbie
 
     def to_job_params(job)
       a = job.css('.vaga a').first
-      { url: a.attr('href'), title: a.text.strip, location: job.css("span[itemprop='addressLocality']").first.text.strip }
+      { url: a.attr('href'), title: a.text.strip, location: job.css("span[itemprop='addressLocality']").first.text.strip, company: job.css("span[itemprop='name']").first.text.strip }
     end
 
     def jobs_selector

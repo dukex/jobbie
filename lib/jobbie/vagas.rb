@@ -5,17 +5,18 @@ module Jobbie
     end
 
     def company
-      find('title').text.scan(/\-\s(.*)\s\(/).flatten.first
+      @company ||= find('title').text.scan(/\-\s(.*)\s\(/).flatten.first
     end
 
     private
 
     def to_job_params(job)
-      { url: path_to_url(job.attr('href')), title: job.attr('title'), location: job.css("span[itemprop='addressLocality']").first.text.split(' / ')[0] }
+      a = job.css("a").first
+      { url: path_to_url(a.attr('href')), title: a.attr('title'), location: job.css("span[itemprop='addressLocality']").first.text.split(' / ')[0], company: job.css("span[itemprop='name']").first.text.strip }
     end
 
     def jobs_selector
-      '.link-detalhes-vaga'
+      'article.vaga'
     end
 
     def selectors_to_remove
