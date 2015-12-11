@@ -68,5 +68,11 @@ describe Jobbie::Trampos do
         expect(jobs.last.url).to eql 'http://trampos.co/oportunidades/123587'
       end
     end
+
+    it 'returns a nil company when private' do
+      VCR.use_cassette 'trampos-php' do
+        expect(described_class.new(url: 'http://trampos.co/oportunidades?tr=php').jobs[2].company).to be_nil
+      end
+    end
   end
 end
