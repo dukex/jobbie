@@ -17,7 +17,7 @@ module Jobbie
     end
 
     def required_skills
-      title_text.scan(regexp(@dictionary[:skills])).flatten
+      (@title || title_text).scan(regexp(@dictionary[:skills])).flatten
     end
 
     %w(focuses skills).each do |collection|
@@ -41,7 +41,7 @@ module Jobbie
     end
 
     def jobs
-      jobs_elements.map { |job| self.class.new to_job_params(job) }
+      jobs_elements.map { |job| self.class.new to_job_params(job).merge(dictionary: @dictionary) }
     end
 
     private

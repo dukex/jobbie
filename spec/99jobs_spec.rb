@@ -52,7 +52,7 @@ describe Jobbie::NinetynineJobs do
   describe '#jobs' do
     it 'returns the jobs' do
       VCR.use_cassette '99jobs-ruby' do
-        jobs = described_class.new(url: 'https://www.99jobs.com/opportunities/search?utf8=%E2%9C%93&search[term]=ruby').jobs
+        jobs = described_class.new(url: 'https://www.99jobs.com/opportunities/search?utf8=%E2%9C%93&search[term]=ruby', dictionary: { skills: %w(Ruby) }).jobs
         expect(jobs.size).to eql 8
         expect(jobs[0].title).to eql 'Oportunidade RubyOnRails [aceita...'
         expect(jobs[0].location).to eql 'São José dos Campos'
@@ -62,6 +62,7 @@ describe Jobbie::NinetynineJobs do
         expect(jobs.first.url).to eql 'https://www.99jobs.com/is/jobs/2499-oportunidade-rubyonrails-aceitamos-remoto'
         expect(jobs.last.url).to eql 'http://www.indeed.com.br/viewjob?jk=122aad586aabc0c9&qd=9D1-e_oxt8bu6zjyUTylcwq-GLP2vL_g1VE5XYfPzvkQHwIPh1fKbIAqilcWIX1ThqDH410613G5kf4UM8Xvykg31ppyphAWdifFbTa8Vqo&indpubnum=4476216539687836&atk=19ogtu9li5uqq860'
         expect(jobs.last.company).to eql("RH Bancos")
+        expect(jobs.last.required_skills).to match_array %w(Ruby)
       end
     end
   end
