@@ -24,7 +24,7 @@ module Jobbie
     end
 
     def company_from(a)
-      text = a.css(".evaluation-average").first.text.scan(/Organização(.*)/).flatten[0]
+      text = a.css('.evaluation-average').first.text.scan(/Organização(.*)/).flatten[0]
       text == 'Não informado' ? nil : text
     end
   end

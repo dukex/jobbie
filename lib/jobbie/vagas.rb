@@ -11,7 +11,7 @@ module Jobbie
     private
 
     def to_job_params(job)
-      a = job.css("a").first
+      a = job.css('a').first
       { url: path_to_url(a.attr('href')), title: a.attr('title'), location: job.css("span[itemprop='addressLocality']").first.text.split(' / ')[0], company: job.css("span[itemprop='name']").first.text.strip }
     end
 
