@@ -75,4 +75,12 @@ describe Jobbie::Trampos do
       end
     end
   end
+
+  describe '#title' do
+    it 'returns the title' do
+      VCR.use_cassette 'trampos-123892' do
+        expect(described_class.new(url: 'http://trampos.co/oportunidades/123892?tr=ruby').title).to eql 'Desenvolvedor(a) Back-end Pleno'
+      end
+    end
+  end
 end

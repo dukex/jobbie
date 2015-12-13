@@ -25,8 +25,12 @@ module Jobbie
       opportunities
     end
 
+    def title_selector
+      'h2'
+    end
+
     def title_text
-      doc.css("meta[name='title']").first.attr 'content'
+      super.gsub(/\#\w{2} /, '')
     end
 
     def document_text
