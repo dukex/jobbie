@@ -12,12 +12,16 @@ module Jobbie
       @company = company
     end
 
+    def title
+      @title ||= title_text
+    end
+
     def seniority
       scan(%w(Junior Júnior Senior Sênior Pleno)).first
     end
 
     def required_skills
-      (@title || title_text).scan(regexp(@dictionary[:skills])).flatten
+      title.scan(regexp(@dictionary[:skills])).flatten
     end
 
     %w(focuses skills).each do |collection|
@@ -73,7 +77,7 @@ module Jobbie
     end
 
     def regexp(values)
-      /(?:\s(?:|\W)|^)(#{values.map { |value| Regexp.escape(value).gsub("\\ ", "[\\ \\-]") }.join("|")})(?:\s|\W\s)/i
+      /(?:\s(?:|\W)|^)(#{values.map { |value| Regexp.escape(value).gsub("\\ ", "[\\ \\-]") }.join("|")})(?:\s|\W\s|$)/i
     end
 
     def title_selector
