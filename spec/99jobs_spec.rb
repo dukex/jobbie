@@ -36,7 +36,7 @@ describe Jobbie::NinetynineJobs do
   describe '#focuses' do
     it 'returns the focuses' do
       VCR.use_cassette '6783-desenvolvedor-a-front-end' do
-        expect(described_class.new(url: 'https://www.99jobs.com/techmob/jobs/6783-desenvolvedor-a-front-end', dictionary: { focuses: ['Front End'] }).focuses).to match_array ['Front-end', 'Front-end', 'front-end']
+        expect(described_class.new(url: 'https://www.99jobs.com/techmob/jobs/6783-desenvolvedor-a-front-end', dictionary: { focuses: ['Front End'] }).focuses).to match_array ['Front-end']
       end
     end
   end

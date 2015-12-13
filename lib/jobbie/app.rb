@@ -59,7 +59,7 @@ module Jobbie
     end
 
     def scan(values)
-      document_text.gsub(%r{,|\/}, ' ').scan(regexp(values)).flatten
+      document_text.gsub(%r{,|\/}, ' ').scan(regexp(values)).flatten.uniq(&:downcase)
     end
 
     def document_text

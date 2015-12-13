@@ -64,7 +64,7 @@ describe Jobbie::Vagas do
 
     it 'returns C and C++' do
       VCR.use_cassette 'vagas-analista-desenvolvedor-c' do
-        expect(described_class.new(url: 'http://www.vagas.com.br/vagas/v1281695/analista-desenvolvedor-c', dictionary: { skills: ['C', 'C#', 'C++'] }).skills).to match_array %w(C++ C++ C)
+        expect(described_class.new(url: 'http://www.vagas.com.br/vagas/v1281695/analista-desenvolvedor-c', dictionary: { skills: ['C', 'C#', 'C++'] }).skills).to match_array %w(C++ C)
       end
     end
   end

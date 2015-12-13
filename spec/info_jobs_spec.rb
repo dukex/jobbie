@@ -34,7 +34,7 @@ describe Jobbie::InfoJobs do
   describe '#skills' do
     it 'returns the skills' do
       VCR.use_cassette 'info-jobs-vaga-de-desenvolvedor-senior-back-end-em-santa-catarina' do
-        expect(described_class.new(url: 'http://www.infojobs.com.br/vaga-de-desenvolvedor-senior-back-end-em-santa-catarina__4857781.aspx', dictionary: { skills: %w(Java Ruby Python) }).skills.uniq).to match_array %w(JAVA Java)
+        expect(described_class.new(url: 'http://www.infojobs.com.br/vaga-de-desenvolvedor-senior-back-end-em-santa-catarina__4857781.aspx', dictionary: { skills: %w(Java Ruby Python) }).skills.uniq).to match_array %w(JAVA)
       end
     end
   end
