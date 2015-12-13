@@ -1,3 +1,5 @@
+require 'json'
+
 module Jobbie
   class Trampos < App
     def location
